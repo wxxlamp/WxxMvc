@@ -1,6 +1,7 @@
-package org.wxxlamp.mvc.bean;
+package cn.wxxlamp.mvc.core;
 
 import java.lang.reflect.Method;
+import java.lang.reflect.Parameter;
 import java.util.Map;
 
 /**
@@ -8,7 +9,7 @@ import java.util.Map;
  * @author wxxlamp
  * @date 2020/05/19~22:56
  */
-public class ControllerInfo {
+public class HandlerMethod {
     /**
      * controller类
      */
@@ -19,15 +20,11 @@ public class ControllerInfo {
      */
     private Method invokeMethod;
 
-    /**
-     * 方法参数别名对应参数类型
-     */
-    private Map<String, Class<?>> methodParameter;
+    private Map<Class<?>, String> params;
 
-    public ControllerInfo(Class<?> controllerClass, Method invokeMethod, Map<String, Class<?>> methodParameter) {
+    public HandlerMethod(Class<?> controllerClass, Method invokeMethod) {
         this.controllerClass = controllerClass;
         this.invokeMethod = invokeMethod;
-        this.methodParameter = methodParameter;
     }
 
     public Class<?> getControllerClass() {
@@ -44,13 +41,5 @@ public class ControllerInfo {
 
     public void setInvokeMethod(Method invokeMethod) {
         this.invokeMethod = invokeMethod;
-    }
-
-    public Map<String, Class<?>> getMethodParameter() {
-        return methodParameter;
-    }
-
-    public void setMethodParameter(Map<String, Class<?>> methodParameter) {
-        this.methodParameter = methodParameter;
     }
 }

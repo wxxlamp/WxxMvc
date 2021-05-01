@@ -1,4 +1,4 @@
-package org.wxxlamp.mvc.error;
+package cn.wxxlamp.mvc.error;
 
 /**
  * @author wxxlamp

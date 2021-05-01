@@ -1,6 +1,6 @@
-package org.wxxlamp.mvc.bean;
+package cn.wxxlamp.mvc.core;
 
-import org.wxxlamp.mvc.annotation.RequestMethod;
+import cn.wxxlamp.mvc.annotation.RequestMethod;
 
 import java.util.Objects;
 
@@ -8,13 +8,13 @@ import java.util.Objects;
  * @author wxxlamp
  * @date 2020/05/20~18:02
  */
-public class PathInfo {
+public class RequestMappingInfo {
 
     private RequestMethod httpMethod;
 
     private String httpPath;
 
-    public PathInfo(RequestMethod httpMethod, String httpPath) {
+    public RequestMappingInfo(RequestMethod httpMethod, String httpPath) {
         this.httpMethod = httpMethod;
         this.httpPath = httpPath;
     }
@@ -43,9 +43,9 @@ public class PathInfo {
         if (o == null || getClass() != o.getClass()) {
             return false;
         }
-        PathInfo pathInfo = (PathInfo) o;
-        return Objects.equals(httpMethod, pathInfo.httpMethod) &&
-                Objects.equals(httpPath, pathInfo.httpPath);
+        RequestMappingInfo requestMappingInfo = (RequestMappingInfo) o;
+        return Objects.equals(httpMethod, requestMappingInfo.httpMethod) &&
+                Objects.equals(httpPath, requestMappingInfo.httpPath);
     }
 
     @Override

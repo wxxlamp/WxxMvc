@@ -5,7 +5,7 @@
          version="4.0">
     <servlet>
         <servlet-name>WxxMVC</servlet-name>
-        <servlet-class>org.wxxlamp.mvc.core.DispatcherServlet</servlet-class>
+        <servlet-class>cn.wxxlamp.mvc.core.DispatcherServlet</servlet-class>
         <load-on-startup>1</load-on-startup>
         <async-supported>true</async-supported>
     </servlet>

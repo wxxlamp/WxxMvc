@@ -1,4 +1,4 @@
-package org.wxxlamp.mvc.annotation;
+package cn.wxxlamp.mvc.annotation;
 
 import java.lang.annotation.ElementType;
 import java.lang.annotation.Retention;
@@ -20,5 +20,5 @@ public @interface RequestMapping {
     /**
      * 请求方法
      */
-    RequestMethod method() default RequestMethod.GET;
+    RequestMethod method() default RequestMethod.ALL;
 }

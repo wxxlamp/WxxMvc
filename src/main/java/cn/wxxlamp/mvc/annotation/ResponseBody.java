@@ -1,4 +1,4 @@
-package org.wxxlamp.mvc.annotation;
+package cn.wxxlamp.mvc.annotation;
 
 import java.lang.annotation.ElementType;
 import java.lang.annotation.Retention;
@@ -13,6 +13,5 @@ import java.lang.annotation.Target;
  */
 @Target(ElementType.METHOD)
 @Retention(RetentionPolicy.RUNTIME)
-@Deprecated
 public @interface ResponseBody {
 }

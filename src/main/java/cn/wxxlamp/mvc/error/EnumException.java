@@ -1,4 +1,4 @@
-package org.wxxlamp.mvc.error;
+package cn.wxxlamp.mvc.error;
 
 /**
  * @author wxxlamp
@@ -7,6 +7,7 @@ package org.wxxlamp.mvc.error;
 public enum EnumException implements CommonException{
     // 1000 表示注解不对
     REQUEST_PARAM_ANNOTATION_IS_NULL(10001, "请求参数没有必须的注解"),
+    METHOD_NEEDS_ANNOTATION(10002, "方法需要加上RequestMapping注解"),
 
     // 2000 表示URL不对
     URL_REPEAT(20001, "URL重复");

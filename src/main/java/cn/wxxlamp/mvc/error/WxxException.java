@@ -1,10 +1,10 @@
-package org.wxxlamp.mvc.error;
+package cn.wxxlamp.mvc.error;
 
 /**
  * @author wxxlamp
  * @date 2020/05/21~08:55
  */
-public class WxxException extends Exception implements CommonException{
+public class WxxException extends RuntimeException implements CommonException{
 
     CommonException commonException;
 
