@@ -1,4 +1,4 @@
-package org.wxxlamp.mvc.core;
+package cn.wxxlamp.mvc.core;
 
 import javax.servlet.http.HttpServletRequest;
 import java.util.HashMap;
