@@ -1,14 +1,12 @@
 package cn.wxxlamp.mvc.core;
 
 import cn.wxxlamp.mvc.annotation.RequestMapping;
-import cn.wxxlamp.mvc.annotation.RequestParam;
 import cn.wxxlamp.mvc.error.EnumException;
 import cn.wxxlamp.mvc.error.WxxException;
 import cn.wxxlamp.mvc.util.ClazzUtils;
 import cn.wxxlamp.mvc.annotation.RequestMethod;
 
 import java.lang.reflect.Method;
-import java.lang.reflect.Parameter;
 import java.util.HashMap;
 import java.util.Map;
 

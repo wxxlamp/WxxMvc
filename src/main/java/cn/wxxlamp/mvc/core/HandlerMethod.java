@@ -20,8 +20,6 @@ public class HandlerMethod {
      */
     private Method invokeMethod;
 
-    private Map<Class<?>, String> params;
-
     public HandlerMethod(Class<?> controllerClass, Method invokeMethod) {
         this.controllerClass = controllerClass;
         this.invokeMethod = invokeMethod;

@@ -10,8 +10,8 @@ import cn.wxxlamp.mvc.annotation.RequestMethod;
 @RequestMapping
 public class Demo {
 
-    @RequestMapping(value = "/666", method = RequestMethod.POST)
-    public String getOne(String a) {
-        return a;
+    @RequestMapping(value = "/666", method = RequestMethod.GET)
+    public String getOne() {
+        return "111";
     }
 }
