@@ -5,6 +5,7 @@ import cn.wxxlamp.mvc.error.EnumException;
 import cn.wxxlamp.mvc.error.WxxException;
 import cn.wxxlamp.mvc.util.ClazzUtils;
 import cn.wxxlamp.mvc.annotation.RequestMethod;
+import cn.wxxlamp.mvc.util.IoUtils;
 
 import java.lang.reflect.Method;
 import java.util.HashMap;
@@ -16,6 +17,8 @@ import java.util.Map;
  */
 public class RequestMappingHandler {
 
+    private static final String PACKAGE_SCAN_SCOPE_KEY = "packageScanScope";
+
     private final Map<RequestMappingInfo, HandlerMethod> requestMap = new HashMap<>();
 
     private boolean clazzHasAnnotation;
@@ -26,8 +29,8 @@ public class RequestMappingHandler {
      * 初始化时扫描含有{@link cn.wxxlamp.mvc.annotation.RequestMapping}的类和方法
      */
     public RequestMappingHandler() {
-        // 包名暂时写死
-        ClazzUtils.getClazzName("cn.wxxlamp.mvc.controller", false)
+        String pkgName = IoUtils.readFromProperties(PACKAGE_SCAN_SCOPE_KEY);
+        ClazzUtils.getClazzName(pkgName, true)
                 .forEach(e -> {
                     try {
                         Class<?> clazz = Class.forName(e);
