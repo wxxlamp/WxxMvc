@@ -7,10 +7,6 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
-import java.lang.reflect.InvocationTargetException;
-import java.lang.reflect.Method;
-import java.util.List;
-import java.util.Map;
 
 /**
  * @author wxxlamp
@@ -20,10 +16,20 @@ public class DispatcherServlet extends HttpServlet {
 
     private RequestMappingHandler requestMappingHandler;
 
+    private HandlerAdapter handlerAdapter;
+
+    private ResultRender resultRender;
+
     @Override
     public void init() throws ServletException {
-        requestMappingHandler = new RequestMappingHandler();
         super.init();
+        initHandler();
+    }
+
+    private void initHandler() {
+        requestMappingHandler = new RequestMappingHandler();
+        handlerAdapter = new HandlerAdapter();
+        resultRender = new ResultRender();
     }
 
     @Override
@@ -36,19 +42,15 @@ public class DispatcherServlet extends HttpServlet {
             path = path.substring(0, path.length() - 1);
         }
 
-        HandlerMethod handlerMethod = requestMappingHandler.getControllerInfo(RequestMethod.valueOf(method), path);
+        HandlerMethod handlerMethod = requestMappingHandler.getHandler(RequestMethod.valueOf(method), path);
 
         if (handlerMethod == null) {
             noHandlerFound(resp);
             return;
         }
-        try {
-            Object result = invokeController(req, resp, handlerMethod);
-            ResultRender resultRender = new ResultRender();
-            resultRender.resultResolver(handlerMethod, result, req, resp);
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
+
+        Object result = handlerAdapter.handle(req, resp, handlerMethod);
+        resultRender.resultResolver(req, resp, result);
 
     }
 
@@ -56,22 +58,4 @@ public class DispatcherServlet extends HttpServlet {
         resp.sendError(HttpServletResponse.SC_NOT_FOUND);
     }
 
-    /**
-     * 反射调用Controller中的方法
-     * @param request {@link HttpServletRequest}
-     * @param response {@link HttpServletResponse}
-     * @param handlerMethod {@link HandlerMethod}
-     */
-    public Object invokeController(HttpServletRequest request, HttpServletResponse response, HandlerMethod handlerMethod)
-            throws InvocationTargetException, IllegalAccessException, InstantiationException {
-
-        Object controller = handlerMethod.getControllerClass().newInstance();
-        Method method = handlerMethod.getInvokeMethod();
-        method.setAccessible(true);
-
-        Object result;
-        result = method.invoke(controller);
-
-        return result;
-    }
 }

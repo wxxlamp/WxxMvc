@@ -84,7 +84,7 @@ public class RequestMappingHandler {
         }
     }
 
-    public HandlerMethod getControllerInfo(RequestMethod method, String path) {
+    public HandlerMethod getHandler(RequestMethod method, String path) {
         RequestMappingInfo requestMappingInfo = new RequestMappingInfo(method, path);
         return requestMap.get(requestMappingInfo);
     }

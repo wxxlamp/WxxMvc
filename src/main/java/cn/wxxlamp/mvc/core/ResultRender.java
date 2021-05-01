@@ -16,13 +16,11 @@ public class ResultRender {
 
     /**
      * 解析返回值，渲染response
-     * @param handlerMethod {@link HandlerMethod}
      * @param result 对应方法的结果
      * @param request {@link HttpServletRequest}
      * @param response {@link HttpServletResponse}
      */
-    public void resultResolver(HandlerMethod handlerMethod, Object result,
-                               HttpServletRequest request, HttpServletResponse response) {
+    public void resultResolver(HttpServletRequest request, HttpServletResponse response, Object result) {
         if (result == null) {
              return;
         }
