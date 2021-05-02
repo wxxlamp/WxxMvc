@@ -42,7 +42,8 @@ public class DispatcherServlet extends HttpServlet {
             path = path.substring(0, path.length() - 1);
         }
 
-        HandlerMethod handlerMethod = requestMappingHandler.getHandler(RequestMethod.valueOf(method), path);
+        HandlerMethod handlerMethod = requestMappingHandler.getHandler(
+                RequestMethod.valueOf(method), path);
 
         if (handlerMethod == null) {
             noHandlerFound(resp);

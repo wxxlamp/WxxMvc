@@ -11,7 +11,7 @@ import java.lang.annotation.Target;
  * @author wxxlamp
  * @date 2021/04/30~14:42
  */
-@Target({ElementType.TYPE, ElementType.METHOD})
+@Target(ElementType.METHOD)
 @Retention(RetentionPolicy.RUNTIME)
 public @interface RequestBody {
 }
