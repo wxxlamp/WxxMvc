@@ -1,6 +1,11 @@
 package cn.wxxlamp.mvc.core;
 
+import cn.wxxlamp.mvc.error.EnumException;
+import cn.wxxlamp.mvc.error.WxxException;
+
+import javax.servlet.http.HttpServletRequest;
 import java.lang.reflect.Method;
+import java.lang.reflect.Parameter;
 
 /**
  * 存储Controller的信息
@@ -9,7 +14,7 @@ import java.lang.reflect.Method;
  */
 public class HandlerMethod {
     /**
-     * controller类
+     * 类
      */
     private Class<?> controllerClass;
 
@@ -18,9 +23,15 @@ public class HandlerMethod {
      */
     private Method invokeMethod;
 
+    /**
+     * 方法参数
+     */
+    private Parameter[] parameters;
+
     public HandlerMethod(Class<?> controllerClass, Method invokeMethod) {
         this.controllerClass = controllerClass;
         this.invokeMethod = invokeMethod;
+        this.parameters = invokeMethod.getParameters();
     }
 
     public Class<?> getControllerClass() {
@@ -37,5 +48,27 @@ public class HandlerMethod {
 
     public void setInvokeMethod(Method invokeMethod) {
         this.invokeMethod = invokeMethod;
+    }
+
+    public Parameter[] getParameters() {
+        return parameters;
+    }
+
+    public void setParameters(Parameter[] parameters) {
+        this.parameters = parameters;
+    }
+
+    public Object[] getMethodArgumentValues(HttpServletRequest request, ArgumentResolver argumentResolvers) {
+        Parameter[] parameters = getParameters();
+        Object[] args = new Object[parameters.length];
+        for (int i = 0; i < parameters.length; i ++) {
+            Parameter parameter = parameters[i];
+            if (argumentResolvers.supportsParameter(parameter)) {
+                args[i] = argumentResolvers.resolveArgument(parameter, request);
+            } else {
+                throw new WxxException(EnumException.NO_SUITABLE_RESOLVER_FOR_PARAMETER);
+            }
+        }
+        return args;
     }
 }

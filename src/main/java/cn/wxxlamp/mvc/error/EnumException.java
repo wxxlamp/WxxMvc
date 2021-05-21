@@ -12,7 +12,10 @@ public enum EnumException implements CommonException{
 
 
     // 2000 表示URL不对
-    URL_REPEAT(20001, "URL重复");
+    URL_REPEAT(20001, "URL重复"),
+
+    // 3000 表示传参不对
+    NO_SUITABLE_RESOLVER_FOR_PARAMETER(30001, "参数无法解析");
 
     private final int code;
     private String msg;

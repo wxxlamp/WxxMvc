@@ -13,18 +13,24 @@ public class HandlerAdapter {
 
     private HandlerMethod handlerMethod;
 
-    private ArgumentResolver argumentResolver;
+    private final ArgumentResolverComposite argumentResolvers = new ArgumentResolverComposite();
 
     public Object handle(HttpServletRequest request, HttpServletResponse response, HandlerMethod handlerMethod) {
         Object result = null;
         try {
             Object controller = handlerMethod.getControllerClass().newInstance();
             Method method = handlerMethod.getInvokeMethod();
+            Object[] args = handlerMethod.getMethodArgumentValues(request, init(argumentResolvers));
             method.setAccessible(true);
-            result = method.invoke(controller);
+            result = method.invoke(controller, args);
         } catch (IllegalAccessException | InvocationTargetException | InstantiationException e) {
             e.printStackTrace();
         }
         return result;
+    }
+
+    private ArgumentResolver init(ArgumentResolverComposite argumentResolvers) {
+        argumentResolvers.addResolver(new RequestBodyArgumentResolver());
+        return argumentResolvers;
     }
 }

@@ -1,5 +1,6 @@
 package cn.wxxlamp.mvc.controller;
 
+import cn.wxxlamp.mvc.annotation.RequestBody;
 import cn.wxxlamp.mvc.annotation.RequestMapping;
 import cn.wxxlamp.mvc.annotation.RequestMethod;
 
@@ -11,7 +12,7 @@ import cn.wxxlamp.mvc.annotation.RequestMethod;
 public class Demo {
 
     @RequestMapping(value = "/666", method = RequestMethod.GET)
-    public String getOne() {
+    public String getOne(@RequestBody String a) {
         return "111";
     }
 }
